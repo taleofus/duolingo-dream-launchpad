@@ -52,6 +52,33 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				duo: {
+					green: {
+						DEFAULT: '#58cc02',
+						hover: '#46a302',
+						light: '#d7ffb8'
+					},
+					purple: {
+						DEFAULT: '#8549ba',
+						hover: '#7131a7',
+						light: '#e9d9fc'
+					},
+					blue: {
+						DEFAULT: '#1cb0f6',
+						hover: '#0c8ad8',
+						light: '#d7f2ff'
+					},
+					orange: {
+						DEFAULT: '#ff9600',
+						hover: '#e08600',
+						light: '#fff5e5'
+					},
+					red: {
+						DEFAULT: '#ff4b4b',
+						hover: '#ea2b2b',
+						light: '#ffe1e1'
+					}
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
