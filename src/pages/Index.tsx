@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 
 const Index: React.FC = () => {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen w-full bg-custom-background">
       <Header />
       <main>
         <HeroSection />

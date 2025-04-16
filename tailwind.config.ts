@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,6 +53,12 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Custom color scheme based on user requirements
+				custom: {
+					primary: '#8942FE',
+					background: '#F1F1F1',
+					secondary: '#21204C'
+				},
 				duo: {
 					green: {
 						DEFAULT: '#58cc02',
@@ -59,8 +66,8 @@ export default {
 						light: '#d7ffb8'
 					},
 					purple: {
-						DEFAULT: '#8549ba',
-						hover: '#7131a7',
+						DEFAULT: '#8942FE', // Updated to match the primary color
+						hover: '#7839d9', // Slightly darker version for hover
 						light: '#e9d9fc'
 					},
 					blue: {
