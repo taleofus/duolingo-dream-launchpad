@@ -2,20 +2,70 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, ChevronRight, Users } from 'lucide-react';
+import { CheckCircle, ChevronRight, Users, Loader2 } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+
+// Define form validation schema
+const waitlistSchema = z.object({
+  email: z.string().email({ message: "Please enter a valid email address" }),
+});
+
+type WaitlistFormValues = z.infer<typeof waitlistSchema>;
 
 const WaitlistSection: React.FC = () => {
-  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { toast } = useToast();
+  
+  // Initialize form with react-hook-form and zod validation
+  const form = useForm<WaitlistFormValues>({
+    resolver: zodResolver(waitlistSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      // In a real app, you would send this to your backend
-      console.log('Email submitted:', email);
+  const onSubmit = async (values: WaitlistFormValues) => {
+    setIsSubmitting(true);
+    
+    try {
+      // This is where you would connect to your backend API
+      console.log('Sending to backend API:', values.email);
+      
+      // Simulate API call with timeout
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Handle successful submission
       setSubmitted(true);
-      setEmail('');
+      toast({
+        title: "Success!",
+        description: "You've been added to the waitlist. We'll be in touch soon!",
+      });
+      form.reset();
+      
+      // Reset submission state after 5 seconds
       setTimeout(() => setSubmitted(false), 5000);
+      
+    } catch (error) {
+      // Handle error
+      console.error('Waitlist submission error:', error);
+      toast({
+        title: "Something went wrong",
+        description: "There was a problem adding you to the waitlist. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -45,23 +95,45 @@ const WaitlistSection: React.FC = () => {
                   <p className="font-medium">Thanks! You're on the waitlist. We'll be in touch soon.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <Input
-                    type="email" 
-                    placeholder="Enter your email address"
-                    className="rounded-xl border-2 border-gray-200 focus:border-custom-primary py-6"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                  <Button 
-                    type="submit" 
-                    className="bg-custom-primary hover:bg-opacity-90 w-full py-6 flex items-center justify-center gap-2"
-                  >
-                    Join Waitlist
-                    <ChevronRight size={20} />
-                  </Button>
-                </form>
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              type="email" 
+                              placeholder="Enter your email address"
+                              className="rounded-xl border-2 border-gray-200 focus:border-custom-primary py-6"
+                              disabled={isSubmitting}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button 
+                      type="submit" 
+                      className="bg-custom-primary hover:bg-opacity-90 w-full py-6 flex items-center justify-center gap-2"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="h-5 w-5 animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          Join Waitlist
+                          <ChevronRight size={20} />
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </Form>
               )}
               
               {/* Gamification Tease */}

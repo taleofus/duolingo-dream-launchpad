@@ -4,6 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Check, Clock, Calendar, Star } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
+  const scrollToWaitlist = () => {
+    const waitlistSection = document.getElementById('waitlist');
+    if (waitlistSection) {
+      waitlistSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="py-20 px-4 sm:px-6 md:px-8">
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -39,11 +46,12 @@ const HeroSection: React.FC = () => {
           </div>
 
           <div className="pt-4">
-            <a href="#waitlist">
-              <Button className="bg-custom-primary hover:bg-opacity-90 py-6 text-base">
-                Join the Waitlist
-              </Button>
-            </a>
+            <Button 
+              onClick={scrollToWaitlist}
+              className="bg-custom-primary hover:bg-opacity-90 py-6 text-base"
+            >
+              Join the Waitlist
+            </Button>
           </div>
         </div>
         
