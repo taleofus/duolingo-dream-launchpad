@@ -1,24 +1,9 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Check, Clock, Calendar, Star } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      // In a real app, you would send this to your backend
-      console.log('Email submitted:', email);
-      setSubmitted(true);
-      setEmail('');
-      setTimeout(() => setSubmitted(false), 5000);
-    }
-  };
-
   return (
     <section className="py-20 px-4 sm:px-6 md:px-8">
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -53,21 +38,12 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          <div>
-            <p className="font-bold text-custom-secondary mb-3">Join our waitlist:</p>
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-              <Input
-                type="email" 
-                placeholder="Enter your email"
-                className="rounded-xl border-2 border-gray-200 focus:border-custom-primary px-4 py-6"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <Button type="submit" className="bg-custom-primary hover:bg-opacity-90 py-6">
-                {submitted ? "You're on the list! 🎉" : "Join Waitlist"}
+          <div className="pt-4">
+            <a href="#waitlist">
+              <Button className="bg-custom-primary hover:bg-opacity-90 py-6 text-base">
+                Join the Waitlist
               </Button>
-            </form>
+            </a>
           </div>
         </div>
         
