@@ -22,15 +22,7 @@ const HeroSection: React.FC = () => {
   return (
     <section className="py-20 px-4 sm:px-6 md:px-8">
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-        <div className="order-2 md:order-1">
-          <img 
-            src="/lovable-uploads/87c4953c-ee53-4980-934c-786e86699b14.png" 
-            alt="FocusOwl Sloth Mascot" 
-            className="w-full max-w-md mx-auto"
-          />
-        </div>
-        
-        <div className="space-y-8 order-1 md:order-2">
+        <div className="space-y-8">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-custom-secondary">
             Take Control of Your 
             <span className="text-custom-primary"> Screen Time</span> with Fun
@@ -77,6 +69,14 @@ const HeroSection: React.FC = () => {
               </Button>
             </form>
           </div>
+        </div>
+        
+        <div className="order-first md:order-last">
+          <img 
+            src="/lovable-uploads/81ae1636-eaba-4f58-a323-3473d7b2ed33.png" 
+            alt="FocusOwl Sloth Mascot" 
+            className="w-full max-w-md mx-auto"
+          />
         </div>
       </div>
     </section>

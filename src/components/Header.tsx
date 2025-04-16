@@ -11,8 +11,6 @@ const Header: React.FC = () => {
           <span className="text-2xl font-extrabold text-custom-primary">FocusOwl</span>
         </div>
         <nav className="hidden md:flex space-x-6">
-          <a href="#features" className="font-medium text-gray-600 hover:text-custom-primary transition-colors">Features</a>
-          <a href="#how-it-works" className="font-medium text-gray-600 hover:text-custom-primary transition-colors">How It Works</a>
           <a href="#waitlist" className="font-medium text-gray-600 hover:text-custom-primary transition-colors">Join Waitlist</a>
         </nav>
         <div className="hidden md:flex items-center">

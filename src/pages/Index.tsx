@@ -2,8 +2,6 @@
 import React from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
-import FeaturesSection from '@/components/FeaturesSection';
-import HowItWorks from '@/components/HowItWorks';
 import WaitlistSection from '@/components/WaitlistSection';
 import Footer from '@/components/Footer';
 
@@ -13,8 +11,6 @@ const Index: React.FC = () => {
       <Header />
       <main>
         <HeroSection />
-        <FeaturesSection />
-        <HowItWorks />
         <WaitlistSection />
       </main>
       <Footer />
