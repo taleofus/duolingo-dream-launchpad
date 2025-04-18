@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
             <span className="text-custom-primary"> Screen Time</span> with Fun
           </h1>
           <p className="text-xl text-gray-600">
-            FocusOwl makes productivity fun with daily goals, streaks, and rewards - 
+            Strive makes productivity fun with daily goals, streaks, and rewards - 
             just like learning a language, but for beating screen addiction!
           </p>
           
@@ -58,7 +58,7 @@ const HeroSection: React.FC = () => {
         <div className="order-first md:order-last">
           <img 
             src="/lovable-uploads/81ae1636-eaba-4f58-a323-3473d7b2ed33.png" 
-            alt="FocusOwl Sloth Mascot" 
+            alt="Strive Sloth Mascot" 
             className="w-full max-w-md mx-auto"
           />
         </div>

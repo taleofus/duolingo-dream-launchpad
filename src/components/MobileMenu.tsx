@@ -22,7 +22,7 @@ const MobileMenu: React.FC = () => {
         <div className="fixed inset-0 z-50 bg-white">
           <div className="container mx-auto px-4 py-6">
             <div className="flex justify-between items-center mb-8">
-              <span className="text-2xl font-extrabold text-duo-green">FocusOwl</span>
+              <span className="text-2xl font-extrabold text-duo-green">Strive</span>
               <Button 
                 variant="ghost" 
                 size="icon" 

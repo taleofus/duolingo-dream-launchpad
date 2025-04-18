@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <div className="flex items-center">
-              <span className="text-2xl font-extrabold text-duo-green">FocusOwl</span>
+              <span className="text-2xl font-extrabold text-duo-green">Strive</span>
             </div>
             <p className="mt-4 text-gray-600 max-w-md">
               Making productivity fun with gamified screen time management, challenges, and rewards.
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
         </div>
         <div className="mt-12 border-t pt-8">
           <p className="text-gray-400 text-sm text-center">
-            &copy; {new Date().getFullYear()} FocusOwl. All rights reserved.
+            &copy; {new Date().getFullYear()} Strive. All rights reserved.
           </p>
         </div>
       </div>

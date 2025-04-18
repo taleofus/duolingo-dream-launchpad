@@ -8,7 +8,7 @@ const Header: React.FC = () => {
     <header className="w-full py-4 px-4 sm:px-6 md:px-8 sticky top-0 bg-white/95 backdrop-blur-sm z-40 shadow-sm">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <span className="text-2xl font-extrabold text-custom-primary">FocusOwl</span>
+          <span className="text-2xl font-extrabold text-custom-primary">Strive</span>
         </div>
         <nav className="hidden md:flex space-x-6">
           <a href="#waitlist" className="font-medium text-gray-600 hover:text-custom-primary transition-colors">Join Waitlist</a>
