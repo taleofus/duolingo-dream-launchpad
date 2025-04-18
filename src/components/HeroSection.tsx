@@ -64,8 +64,8 @@ const HeroSection: React.FC = () => {
             <Skeleton className="w-full h-[500px] max-w-md mx-auto rounded-xl" />
           )}
           <img 
-            src="/lovable-uploads/81ae1636-eaba-4f58-a323-3473d7b2ed33.png" 
-            alt="Strive Sloth Mascot - Your friendly productivity companion"
+            src="/lovable-uploads/098aa936-5ba7-4eff-81a3-b9aba2cdaef8.png" 
+            alt="Strive Sloth Mascot - Skateboarding Productivity Companion"
             className={`w-full max-w-md mx-auto ${imageLoaded ? 'block' : 'hidden'}`}
             width="500"
             height="500"

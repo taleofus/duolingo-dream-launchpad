@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -160,8 +159,8 @@ const WaitlistSection: React.FC = () => {
                 <Skeleton className="w-full h-[300px] rounded-xl" />
               )}
               <img 
-                src="/lovable-uploads/81ae1636-eaba-4f58-a323-3473d7b2ed33.png"
-                alt="Strive Sloth Mascot"
+                src="/lovable-uploads/098aa936-5ba7-4eff-81a3-b9aba2cdaef8.png"
+                alt="Strive Skateboarding Sloth Mascot"
                 className={`w-full animate-float ${imageLoaded ? 'block' : 'hidden'}`}
                 onLoad={() => setImageLoaded(true)}
                 loading="lazy"
