@@ -12,7 +12,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 md:px-8">
+    <section aria-label="hero" className="py-20 px-4 sm:px-6 md:px-8">
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-8">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-custom-secondary">
@@ -25,21 +25,21 @@ const HeroSection: React.FC = () => {
           </p>
           
           <div className="flex flex-wrap gap-4 pt-2">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" role="listitem">
               <div className="rounded-full bg-custom-primary bg-opacity-10 p-1">
-                <Check className="h-5 w-5 text-custom-primary" />
+                <Check className="h-5 w-5 text-custom-primary" aria-hidden="true" />
               </div>
               <span className="font-medium">Daily Challenges</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" role="listitem">
               <div className="rounded-full bg-custom-primary bg-opacity-10 p-1">
-                <Star className="h-5 w-5 text-custom-primary" />
+                <Star className="h-5 w-5 text-custom-primary" aria-hidden="true" />
               </div>
               <span className="font-medium">Fun Rewards</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" role="listitem">
               <div className="rounded-full bg-custom-primary bg-opacity-10 p-1">
-                <Calendar className="h-5 w-5 text-custom-primary" />
+                <Calendar className="h-5 w-5 text-custom-primary" aria-hidden="true" />
               </div>
               <span className="font-medium">Productivity Streaks</span>
             </div>
@@ -49,6 +49,7 @@ const HeroSection: React.FC = () => {
             <Button 
               onClick={scrollToWaitlist}
               className="bg-custom-primary hover:bg-opacity-90 py-6 text-base"
+              aria-label="Join the Waitlist"
             >
               Join the Waitlist
             </Button>
@@ -58,8 +59,11 @@ const HeroSection: React.FC = () => {
         <div className="order-first md:order-last">
           <img 
             src="/lovable-uploads/81ae1636-eaba-4f58-a323-3473d7b2ed33.png" 
-            alt="Strive Sloth Mascot" 
+            alt="Strive Sloth Mascot - Your friendly productivity companion"
             className="w-full max-w-md mx-auto"
+            width="500"
+            height="500"
+            loading="eager"
           />
         </div>
       </div>
