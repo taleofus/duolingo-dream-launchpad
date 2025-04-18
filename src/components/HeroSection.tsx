@@ -2,8 +2,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Check, Clock, Calendar, Star } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const HeroSection: React.FC = () => {
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
   const scrollToWaitlist = () => {
     const waitlistSection = document.getElementById('waitlist');
     if (waitlistSection) {
@@ -56,14 +59,18 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
         
-        <div className="order-first md:order-last">
+        <div className="order-first md:order-last relative">
+          {!imageLoaded && (
+            <Skeleton className="w-full h-[500px] max-w-md mx-auto rounded-xl" />
+          )}
           <img 
             src="/lovable-uploads/81ae1636-eaba-4f58-a323-3473d7b2ed33.png" 
             alt="Strive Sloth Mascot - Your friendly productivity companion"
-            className="w-full max-w-md mx-auto"
+            className={`w-full max-w-md mx-auto ${imageLoaded ? 'block' : 'hidden'}`}
             width="500"
             height="500"
             loading="eager"
+            onLoad={() => setImageLoaded(true)}
           />
         </div>
       </div>

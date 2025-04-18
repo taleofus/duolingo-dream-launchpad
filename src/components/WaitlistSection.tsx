@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Form,
   FormControl,
@@ -25,6 +26,7 @@ type WaitlistFormValues = z.infer<typeof waitlistSchema>;
 const WaitlistSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { toast } = useToast();
   
   // Initialize form with react-hook-form and zod validation
@@ -84,7 +86,7 @@ const WaitlistSection: React.FC = () => {
                 <Users className="text-custom-primary" size={20} />
                 <span className="text-sm font-bold text-custom-primary">JOIN 1,000+ EARLY ADOPTERS</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-custom-secondary">Get Early Access to FocusOwl</h2>
+              <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-custom-secondary">Get Early Access to Strive</h2>
               <p className="text-gray-600 mb-6">
                 Be among the first to experience our productivity game that makes managing screen time fun and rewarding.
               </p>
@@ -154,10 +156,15 @@ const WaitlistSection: React.FC = () => {
             
             {/* Mascot/Visual Element */}
             <div className="hidden md:block w-1/3 relative">
+              {!imageLoaded && (
+                <Skeleton className="w-full h-[300px] rounded-xl" />
+              )}
               <img 
                 src="/lovable-uploads/81ae1636-eaba-4f58-a323-3473d7b2ed33.png"
-                alt="FocusOwl Sloth Mascot"
-                className="w-full animate-float"
+                alt="Strive Sloth Mascot"
+                className={`w-full animate-float ${imageLoaded ? 'block' : 'hidden'}`}
+                onLoad={() => setImageLoaded(true)}
+                loading="lazy"
               />
               
               {/* Progress Bar */}
