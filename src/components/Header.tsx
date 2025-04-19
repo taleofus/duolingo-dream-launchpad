@@ -10,11 +10,6 @@ const Header: React.FC = () => {
         <div className="flex items-center">
           <span className="text-2xl font-extrabold text-duo-purple">Strive</span>
         </div>
-        <nav className="hidden md:flex space-x-8">
-          <a href="#waitlist" className="font-medium text-gray-600 hover:text-duo-purple transition-colors">
-            Join Waitlist
-          </a>
-        </nav>
         <div className="hidden md:flex items-center">
           <Button 
             className="bg-duo-purple hover:bg-duo-purple-hover text-white px-6 py-2 rounded-xl text-sm transition-colors"
