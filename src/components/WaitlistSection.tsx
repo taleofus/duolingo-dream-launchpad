@@ -1,26 +1,11 @@
+
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { CheckCircle, ChevronRight, Users, Loader2 } from "lucide-react";
+import { CheckCircle, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
 import useApi from "@/hooks/use-api";
-
-const waitlistSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address" }),
-});
-
-type WaitlistFormValues = z.infer<typeof waitlistSchema>;
+import WaitlistForm from "./waitlist/WaitlistForm";
+import EarlyAdopterBadges from "./waitlist/EarlyAdopterBadges";
+import WaitlistProgress from "./waitlist/WaitlistProgress";
 
 const WaitlistSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,27 +14,16 @@ const WaitlistSection: React.FC = () => {
   const { toast } = useToast();
   const { post } = useApi();
 
-  const form = useForm<WaitlistFormValues>({
-    resolver: zodResolver(waitlistSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
-
-  const onSubmit = async (values: WaitlistFormValues) => {
+  const onSubmit = async (values: { email: string }) => {
     setIsSubmitting(true);
 
     try {
       await post("/marketing/subscribe", values);
-
       setSubmitted(true);
       toast({
         title: "Success!",
-        description:
-          "You've been added to the waitlist. We'll be in touch soon!",
+        description: "You've been added to the waitlist. We'll be in touch soon!",
       });
-      form.reset();
-
       setTimeout(() => setSubmitted(false), 5000);
     } catch (error) {
       toast({
@@ -98,96 +72,16 @@ const WaitlistSection: React.FC = () => {
                   </p>
                 </div>
               ) : (
-                <Form {...form}>
-                  <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-4"
-                  >
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              type="email"
-                              placeholder="Enter your email address"
-                              className="rounded-xl border-2 border-gray-200 focus:border-duo-purple py-6"
-                              disabled={isSubmitting}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      type="submit"
-                      className="bg-duo-purple hover:bg-duo-purple-hover w-full py-6 flex items-center justify-center gap-2 transition-colors"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="h-5 w-5 animate-spin" />
-                          Processing...
-                        </>
-                      ) : (
-                        <>
-                          Join Waitlist
-                          <ChevronRight size={20} />
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </Form>
+                <WaitlistForm onSubmit={onSubmit} isSubmitting={isSubmitting} />
               )}
 
-              <div className="mt-8 flex items-center gap-4 lg:gap-6">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3].map((n) => (
-                    <div
-                      key={n}
-                      className="w-10 h-10 rounded-full border-2 border-white bg-duo-purple flex items-center justify-center text-white font-bold"
-                    >
-                      {n}
-                    </div>
-                  ))}
-                </div>
-                <div className="text-sm text-gray-600">
-                  <p className="font-bold mb-0.5">
-                    Earn exclusive badges as an early adopter
-                  </p>
-                  <p className="text-gray-500">
-                    Be among the first to start your productivity streak
-                  </p>
-                </div>
-              </div>
+              <EarlyAdopterBadges />
             </div>
 
-            <div className="hidden md:block w-1/3 relative">
-              {!imageLoaded && (
-                <Skeleton className="w-full h-[300px] rounded-xl" />
-              )}
-              <img
-                src="/lovable-uploads/098aa936-5ba7-4eff-81a3-b9aba2cdaef8.png"
-                alt="Strive Skateboarding Sloth Mascot"
-                className={`w-full animate-float ${
-                  imageLoaded ? "block" : "hidden"
-                }`}
-                onLoad={() => setImageLoaded(true)}
-                loading="lazy"
-              />
-
-              <div className="mt-6 bg-gray-100 w-full rounded-full h-3">
-                <div
-                  className="bg-duo-purple h-full rounded-full transition-all duration-300"
-                  style={{ width: "70%" }}
-                ></div>
-              </div>
-              <p className="text-sm font-medium text-gray-600 mt-3">
-                70% of waitlist spots filled
-              </p>
-            </div>
+            <WaitlistProgress 
+              imageLoaded={imageLoaded}
+              onImageLoad={() => setImageLoaded(true)}
+            />
           </div>
         </div>
       </div>
