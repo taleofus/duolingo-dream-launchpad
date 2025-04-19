@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Check, Clock, Calendar, Star } from 'lucide-react';
+import { Check, Star, Calendar } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const HeroSection: React.FC = () => {
@@ -15,13 +14,14 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section aria-label="hero" className="py-16 px-4 sm:px-6 md:px-8">
+    <section aria-label="hero" className="py-12 px-4 sm:px-6 md:px-8">
       <div className="container mx-auto grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
         <div className="space-y-6">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-custom-secondary">
             Take Control of Your 
-            <span className="text-custom-primary"> Screen Time</span> with Fun
+            <span className="text-duo-purple"> Screen Time</span> with Fun
           </h1>
+          
           <p className="text-lg text-gray-600 leading-relaxed">
             Strive makes productivity fun with daily goals, streaks, and rewards - 
             just like learning a language, but for beating screen addiction!
@@ -29,20 +29,20 @@ const HeroSection: React.FC = () => {
           
           <div className="flex flex-wrap gap-3 md:gap-4 pt-2">
             <div className="flex items-center gap-2" role="listitem">
-              <div className="rounded-full bg-custom-primary bg-opacity-10 p-1.5">
-                <Check className="h-4 w-4 text-custom-primary" aria-hidden="true" />
+              <div className="rounded-full bg-duo-purple bg-opacity-10 p-1.5">
+                <Check className="h-4 w-4 text-duo-purple" aria-hidden="true" />
               </div>
               <span className="font-medium text-sm md:text-base">Daily Challenges</span>
             </div>
             <div className="flex items-center gap-2" role="listitem">
-              <div className="rounded-full bg-custom-primary bg-opacity-10 p-1.5">
-                <Star className="h-4 w-4 text-custom-primary" aria-hidden="true" />
+              <div className="rounded-full bg-duo-purple bg-opacity-10 p-1.5">
+                <Star className="h-4 w-4 text-duo-purple" aria-hidden="true" />
               </div>
               <span className="font-medium text-sm md:text-base">Fun Rewards</span>
             </div>
             <div className="flex items-center gap-2" role="listitem">
-              <div className="rounded-full bg-custom-primary bg-opacity-10 p-1.5">
-                <Calendar className="h-4 w-4 text-custom-primary" aria-hidden="true" />
+              <div className="rounded-full bg-duo-purple bg-opacity-10 p-1.5">
+                <Calendar className="h-4 w-4 text-duo-purple" aria-hidden="true" />
               </div>
               <span className="font-medium text-sm md:text-base">Productivity Streaks</span>
             </div>
@@ -51,7 +51,7 @@ const HeroSection: React.FC = () => {
           <div className="pt-4">
             <Button 
               onClick={scrollToWaitlist}
-              className="bg-custom-primary hover:bg-opacity-90 py-5 px-8 text-base"
+              className="bg-duo-purple hover:bg-duo-purple-hover text-white py-5 px-8 text-base transition-colors"
               aria-label="Join the Waitlist"
             >
               Join the Waitlist
