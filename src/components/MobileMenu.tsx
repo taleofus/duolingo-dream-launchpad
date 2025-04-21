@@ -23,16 +23,17 @@ const MobileMenu: React.FC = () => {
 
   return (
     <div className="md:hidden">
-      <Button 
-        variant="ghost" 
-        size="icon" 
-        className="text-gray-700" 
-        onClick={() => setIsOpen(true)}
-      >
-        <Menu className="h-6 w-6" />
-      </Button>
-
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetTrigger asChild>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="text-gray-700"
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
+        </SheetTrigger>
+
         <SheetContent 
           side="right" 
           className="w-[85%] max-w-sm p-0 border-0 bg-white shadow-xl"
@@ -82,14 +83,6 @@ const MobileMenu: React.FC = () => {
               >
                 Get Early Access
               </Button>
-            </div>
-            
-            {/* Decorative Elements */}
-            <div className="absolute bottom-28 left-8">
-              <div className="w-16 h-16 bg-duo-purple-light rounded-full opacity-50" />
-            </div>
-            <div className="absolute bottom-48 right-12">
-              <div className="w-10 h-10 bg-duo-purple-light rounded-full opacity-50" />
             </div>
           </div>
         </SheetContent>
