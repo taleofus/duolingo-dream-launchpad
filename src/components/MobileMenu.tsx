@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { SheetClose, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 
 const MobileMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,20 +36,24 @@ const MobileMenu: React.FC = () => {
         <SheetContent 
           side="right" 
           className="w-[85%] max-w-sm p-0 border-0 bg-white shadow-xl"
-          overlayClassName="bg-black/40"
         >
+          {/* Add SheetTitle for accessibility */}
+          <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+          <SheetDescription className="sr-only">Main navigation links</SheetDescription>
+          
           <div className="flex flex-col h-full">
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b">
               <span className="text-2xl font-extrabold text-duo-purple">Strive</span>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="text-gray-700" 
-                onClick={() => setIsOpen(false)}
-              >
-                <X className="h-6 w-6" />
-              </Button>
+              <SheetClose asChild>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-gray-700"
+                >
+                  <X className="h-6 w-6" />
+                </Button>
+              </SheetClose>
             </div>
             
             {/* Navigation Links */}
