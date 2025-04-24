@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import useApi from "@/hooks/use-api";
 
 interface WaitlistProgressProps {
   imageLoaded: boolean;
@@ -8,31 +9,29 @@ interface WaitlistProgressProps {
 }
 
 const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImageLoad }) => {
-  const [progress, setProgress] = useState(69); // Starting with a fixed number
-  const [joinedCount, setJoinedCount] = useState(420); // Actual count of people joined
-  const maxSpots = 600; // Total spots available
+  const [progress, setProgress] = useState(0);
+  const [joinedCount, setJoinedCount] = useState(0);
+  const maxSpots = 1000; // Updated to 1000 as per your requirement
   const imageRef = useRef<HTMLImageElement>(null);
+  const { get } = useApi(); // Use the existing useApi hook
 
-  // Calculate progress based on actual count
+  // Fetch real user count from backend
   useEffect(() => {
-    const calculateProgress = () => {
-      const newProgress = Math.min(Math.round((joinedCount / maxSpots) * 100), 99);
-      setProgress(newProgress);
-    };
-    
-    calculateProgress();
-    
-    // Simulate new joins occasionally
-    const joinInterval = setInterval(() => {
-      if (Math.random() > 0.7) { // 30% chance of someone new joining
-        setJoinedCount(prev => {
-          const newCount = prev + 1;
-          return newCount > maxSpots ? maxSpots : newCount;
-        });
+    const fetchWaitlistCount = async () => {
+      try {
+        const response = await get('/marketing/waitlist-count');
+        const count = response?.count || 0;
+        setJoinedCount(count);
+        setProgress(Math.min(Math.round((count / maxSpots) * 100), 99));
+      } catch (error) {
+        console.error('Failed to fetch waitlist count', error);
+        // Fallback to default values if fetch fails
+        setJoinedCount(0);
+        setProgress(0);
       }
-    }, 5000);
-    
-    return () => clearInterval(joinInterval);
+    };
+
+    fetchWaitlistCount();
   }, []);
   
   // Ensure image is loaded and visible
@@ -43,11 +42,6 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
       };
     }
   }, [onImageLoad]);
-  
-  // Update progress whenever joined count changes
-  useEffect(() => {
-    setProgress(Math.min(Math.round((joinedCount / maxSpots) * 100), 99));
-  }, [joinedCount]);
 
   return (
     <div className="hidden md:block w-1/3 relative">
