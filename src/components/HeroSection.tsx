@@ -18,13 +18,14 @@ const HeroSection: React.FC = () => {
       <div className="container mx-auto grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
         <div className="space-y-6">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-custom-secondary">
-            Take Control of Your 
-            <span className="text-duo-purple"> Screen Time</span> with Fun
+            Reclaim Your 
+            <span className="text-duo-purple"> Screen Time</span> and Make It Fun
           </h1>
           
           <p className="text-lg text-gray-600 leading-relaxed">
-            Strive makes productivity fun with daily goals, streaks, and rewards - 
-            just like learning a language, but for beating screen addiction!
+            Strive helps you use your screen with intention - without the guilt. 
+            Get smart nudges, helpful tools and a sloth sidekick that keeps you 
+            aware (and slightly roasted) while you scroll
           </p>
           
           <div className="flex flex-wrap gap-3 md:gap-4 pt-2">
