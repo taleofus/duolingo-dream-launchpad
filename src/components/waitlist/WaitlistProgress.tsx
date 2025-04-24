@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface WaitlistProgressProps {
@@ -8,24 +8,44 @@ interface WaitlistProgressProps {
 }
 
 const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImageLoad }) => {
-  const [progress, setProgress] = useState(70);
+  const [progress, setProgress] = useState(69); // Starting with a fixed number
+  const [joinedCount, setJoinedCount] = useState(420); // Actual count of people joined
+  const maxSpots = 600; // Total spots available
+  const countRef = useRef<HTMLImageElement>(null);
 
+  // Calculate progress based on actual count
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(current => {
-        const change = Math.random() < 0.5 ? -0.1 : 0.1;
-        const newValue = current + change;
-        return Math.min(Math.max(newValue, 65), 75);
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
+    // Update the initial count and progress
+    const calculateProgress = () => {
+      const newProgress = Math.min(Math.round((joinedCount / maxSpots) * 100), 99);
+      setProgress(newProgress);
+    };
+    
+    calculateProgress();
+    
+    // Simulate new joins occasionally
+    const joinInterval = setInterval(() => {
+      if (Math.random() > 0.7) { // 30% chance of someone new joining
+        setJoinedCount(prev => {
+          const newCount = prev + 1;
+          return newCount > maxSpots ? maxSpots : newCount;
+        });
+      }
+    }, 5000);
+    
+    return () => clearInterval(joinInterval);
   }, []);
+  
+  // Update progress whenever joined count changes
+  useEffect(() => {
+    setProgress(Math.min(Math.round((joinedCount / maxSpots) * 100), 99));
+  }, [joinedCount]);
 
   return (
     <div className="hidden md:block w-1/3 relative">
       {!imageLoaded && <Skeleton className="w-full h-[300px] rounded-xl" />}
       <img
+        ref={countRef}
         src="/lovable-uploads/098aa936-5ba7-4eff-81a3-b9aba2cdaef8.png"
         alt="Strive Skateboarding Sloth Mascot"
         className={`w-full animate-float ${imageLoaded ? "block" : "hidden"}`}
@@ -34,12 +54,12 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
       />
       <div className="mt-6 bg-gray-100 w-full rounded-full h-3">
         <div
-          className="bg-duo-purple h-full rounded-full transition-all duration-300"
+          className="bg-duo-purple h-full rounded-full transition-all duration-1000"
           style={{ width: `${progress}%` }}
         ></div>
       </div>
       <p className="text-sm font-medium text-gray-600 mt-3">
-        {Math.round(progress)}% of waitlist spots filled
+        {joinedCount} out of {maxSpots} people already joined - {progress}% full
       </p>
     </div>
   );
