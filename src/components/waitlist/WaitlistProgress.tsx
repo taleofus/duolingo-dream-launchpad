@@ -11,11 +11,10 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
   const [progress, setProgress] = useState(69); // Starting with a fixed number
   const [joinedCount, setJoinedCount] = useState(420); // Actual count of people joined
   const maxSpots = 600; // Total spots available
-  const countRef = useRef<HTMLImageElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   // Calculate progress based on actual count
   useEffect(() => {
-    // Update the initial count and progress
     const calculateProgress = () => {
       const newProgress = Math.min(Math.round((joinedCount / maxSpots) * 100), 99);
       setProgress(newProgress);
@@ -36,6 +35,15 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
     return () => clearInterval(joinInterval);
   }, []);
   
+  // Ensure image is loaded and visible
+  useEffect(() => {
+    if (imageRef.current) {
+      imageRef.current.onload = () => {
+        onImageLoad();
+      };
+    }
+  }, [onImageLoad]);
+  
   // Update progress whenever joined count changes
   useEffect(() => {
     setProgress(Math.min(Math.round((joinedCount / maxSpots) * 100), 99));
@@ -45,11 +53,10 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
     <div className="hidden md:block w-1/3 relative">
       {!imageLoaded && <Skeleton className="w-full h-[300px] rounded-xl" />}
       <img
-        ref={countRef}
+        ref={imageRef}
         src="/lovable-uploads/098aa936-5ba7-4eff-81a3-b9aba2cdaef8.png"
         alt="Strive Skateboarding Sloth Mascot"
         className={`w-full animate-float ${imageLoaded ? "block" : "hidden"}`}
-        onLoad={onImageLoad}
         loading="lazy"
       />
       <div className="mt-6 bg-gray-100 w-full rounded-full h-3">
