@@ -1,6 +1,6 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Check, Star, Calendar } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const HeroSection: React.FC = () => {
@@ -19,7 +19,8 @@ const HeroSection: React.FC = () => {
         <div className="space-y-6">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-custom-secondary">
             Reclaim Your 
-            <span className="text-duo-purple"> Screen Time</span> and Make It Fun
+            <span className="text-duo-purple"> Screen Time</span> and Make It
+            <span className="text-4xl sm:text-5xl md:text-5xl"> Fun</span>
           </h1>
           
           <p className="text-lg text-gray-600 leading-relaxed">
@@ -27,27 +28,6 @@ const HeroSection: React.FC = () => {
             Get smart nudges, helpful tools and a sloth sidekick that keeps you 
             aware (and slightly roasted) while you scroll
           </p>
-          
-          <div className="flex flex-wrap gap-3 md:gap-4 pt-2">
-            <div className="flex items-center gap-2" role="listitem">
-              <div className="rounded-full bg-duo-purple bg-opacity-10 p-1.5">
-                <Check className="h-4 w-4 text-duo-purple" aria-hidden="true" />
-              </div>
-              <span className="font-medium text-sm md:text-base">Daily Challenges</span>
-            </div>
-            <div className="flex items-center gap-2" role="listitem">
-              <div className="rounded-full bg-duo-purple bg-opacity-10 p-1.5">
-                <Star className="h-4 w-4 text-duo-purple" aria-hidden="true" />
-              </div>
-              <span className="font-medium text-sm md:text-base">Fun Rewards</span>
-            </div>
-            <div className="flex items-center gap-2" role="listitem">
-              <div className="rounded-full bg-duo-purple bg-opacity-10 p-1.5">
-                <Calendar className="h-4 w-4 text-duo-purple" aria-hidden="true" />
-              </div>
-              <span className="font-medium text-sm md:text-base">Productivity Streaks</span>
-            </div>
-          </div>
 
           <div className="pt-4">
             <Button 

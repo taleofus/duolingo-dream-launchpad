@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface WaitlistProgressProps {
@@ -8,6 +8,20 @@ interface WaitlistProgressProps {
 }
 
 const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImageLoad }) => {
+  const [progress, setProgress] = useState(70);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(current => {
+        const change = Math.random() < 0.5 ? -0.1 : 0.1;
+        const newValue = current + change;
+        return Math.min(Math.max(newValue, 65), 75);
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="hidden md:block w-1/3 relative">
       {!imageLoaded && <Skeleton className="w-full h-[300px] rounded-xl" />}
@@ -21,11 +35,11 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
       <div className="mt-6 bg-gray-100 w-full rounded-full h-3">
         <div
           className="bg-duo-purple h-full rounded-full transition-all duration-300"
-          style={{ width: "70%" }}
+          style={{ width: `${progress}%` }}
         ></div>
       </div>
       <p className="text-sm font-medium text-gray-600 mt-3">
-        70% of waitlist spots filled
+        {Math.round(progress)}% of waitlist spots filled
       </p>
     </div>
   );
