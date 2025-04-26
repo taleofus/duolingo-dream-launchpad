@@ -8,6 +8,11 @@ interface WaitlistProgressProps {
   onImageLoad: () => void;
 }
 
+// Define an interface for the API response
+interface WaitlistCountResponse {
+  count: number;
+}
+
 const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImageLoad }) => {
   const [progress, setProgress] = useState(0);
   const [joinedCount, setJoinedCount] = useState(0);
@@ -19,7 +24,8 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
   useEffect(() => {
     const fetchWaitlistCount = async () => {
       try {
-        const response = await get('/marketing/waitlist-count');
+        // Type the response properly
+        const response = await get<WaitlistCountResponse>('/marketing/waitlist-count');
         const count = response?.count || 0;
         setJoinedCount(count);
         setProgress(Math.min(Math.round((count / maxSpots) * 100), 99));
@@ -32,7 +38,7 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
     };
 
     fetchWaitlistCount();
-  }, []);
+  }, [get]);
   
   // Ensure image is loaded and visible
   useEffect(() => {
