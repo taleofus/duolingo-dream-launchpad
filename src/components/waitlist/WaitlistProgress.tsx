@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import useApi from "@/hooks/use-api";
@@ -10,10 +9,13 @@ interface WaitlistProgressProps {
 
 // Define an interface for the API response
 interface WaitlistCountResponse {
-  count: number;
+  numberOfSubscribers: number;
 }
 
-const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImageLoad }) => {
+const WaitlistProgress: React.FC<WaitlistProgressProps> = ({
+  imageLoaded,
+  onImageLoad,
+}) => {
   const [progress, setProgress] = useState(0);
   const [joinedCount, setJoinedCount] = useState(0);
   const maxSpots = 1000; // Updated to 1000 as per your requirement
@@ -25,12 +27,14 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
     const fetchWaitlistCount = async () => {
       try {
         // Type the response properly
-        const response = await get<WaitlistCountResponse>('/marketing/waitlist-count');
-        const count = response?.count || 0;
+        const response = await get<WaitlistCountResponse>(
+          "/marketing/subscribers/count"
+        );
+        const count = response?.numberOfSubscribers || 0;
         setJoinedCount(count);
         setProgress(Math.min(Math.round((count / maxSpots) * 100), 99));
       } catch (error) {
-        console.error('Failed to fetch waitlist count', error);
+        console.error("Failed to fetch waitlist count", error);
         // Fallback to default values if fetch fails
         setJoinedCount(0);
         setProgress(0);
@@ -39,7 +43,7 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({ imageLoaded, onImag
 
     fetchWaitlistCount();
   }, [get]);
-  
+
   // Ensure image is loaded and visible
   useEffect(() => {
     if (imageRef.current) {
