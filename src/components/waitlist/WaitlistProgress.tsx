@@ -5,6 +5,7 @@ import useApi from "@/hooks/use-api";
 interface WaitlistProgressProps {
   imageLoaded: boolean;
   onImageLoad: () => void;
+  newSubscriber: string;
 }
 
 // Define an interface for the API response
@@ -15,6 +16,7 @@ interface WaitlistCountResponse {
 const WaitlistProgress: React.FC<WaitlistProgressProps> = ({
   imageLoaded,
   onImageLoad,
+  newSubscriber,
 }) => {
   const [progress, setProgress] = useState(0);
   const [joinedCount, setJoinedCount] = useState(0);
@@ -42,7 +44,7 @@ const WaitlistProgress: React.FC<WaitlistProgressProps> = ({
     };
 
     fetchWaitlistCount();
-  }, [get]);
+  }, [get, newSubscriber]);
 
   // Ensure image is loaded and visible
   useEffect(() => {

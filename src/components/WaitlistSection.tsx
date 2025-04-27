@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { CheckCircle, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -8,6 +7,7 @@ import EarlyAdopterBadges from "./waitlist/EarlyAdopterBadges";
 import WaitlistProgress from "./waitlist/WaitlistProgress";
 
 const WaitlistSection: React.FC = () => {
+  const [newSubscriber, setNewSubscriber] = useState<string>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -19,10 +19,12 @@ const WaitlistSection: React.FC = () => {
 
     try {
       await post("/marketing/subscribe", values);
+      setNewSubscriber(values.email);
       setSubmitted(true);
       toast({
         title: "Success!",
-        description: "You've been added to the waitlist. We'll be in touch soon!",
+        description:
+          "You've been added to the waitlist. We'll be in touch soon!",
       });
       setTimeout(() => setSubmitted(false), 5000);
     } catch (error) {
@@ -78,9 +80,10 @@ const WaitlistSection: React.FC = () => {
               <EarlyAdopterBadges />
             </div>
 
-            <WaitlistProgress 
+            <WaitlistProgress
               imageLoaded={imageLoaded}
               onImageLoad={() => setImageLoaded(true)}
+              newSubscriber={newSubscriber}
             />
           </div>
         </div>
